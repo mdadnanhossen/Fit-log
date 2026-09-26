@@ -1,8 +1,8 @@
 
-import { IPlanLogo } from "@/types/logos.types";
+import { ILogo } from "@/types/logos.types";
 
 interface PlanStatsProps {
-  workouts: IPlanLogo[];
+  workouts: ILogo[];
 }
 
 const PlanStats = ({ workouts }: PlanStatsProps) => {
