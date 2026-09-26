@@ -1,19 +1,22 @@
+
 import Image from "next/image";
+import { notFound } from "next/navigation";
+
 import { ILogo } from "@/types/logos.types";
 import AddButton from "@/components/logosDetails/AddButton";
 import SaveButton from "@/components/logosDetails/SaveButton";
 
 interface PageProps {
-  params: Promise<{
-    id: string;
-  }>;
+  params: Promise<{ id: string }>;
 }
 
-const getLogo = async (id: string): Promise<ILogo> => {
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+const getLogo = async (id: string): Promise<ILogo | null> => {
+  const res = await fetch(
+    `https://api.abcz.workers.dev/api/fitlog/${id}`
+  );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch workout details");
+    return null;
   }
 
   return res.json();
@@ -24,20 +27,46 @@ const Page = async ({ params }: PageProps) => {
 
   const logo = await getLogo(id);
 
+  // Invalid workout ID
+  if (!logo) {
+    notFound();
+  }
+
   const stats = [
-    { label: "Equipment", value: logo.equipment },
-    { label: "Difficulty", value: logo.difficulty },
-    { label: "Sets", value: logo.sets },
-    { label: "Reps", value: logo.reps },
-    { label: "Duration", value: `${logo.duration} min` },
-    { label: "Calories", value: `${logo.caloriesBurned} kcal` },
-    { label: "Rating", value: logo.rating },
+    {
+      label: "Equipment",
+      value: logo.equipment,
+    },
+    {
+      label: "Difficulty",
+      value: logo.difficulty,
+    },
+    {
+      label: "Sets",
+      value: logo.sets,
+    },
+    {
+      label: "Reps",
+      value: logo.reps,
+    },
+    {
+      label: "Duration",
+      value: `${logo.duration} min`,
+    },
+    {
+      label: "Calories",
+      value: `${logo.caloriesBurned} kcal`,
+    },
+    {
+      label: "Rating",
+      value: logo.rating,
+    },
   ];
 
   return (
     <section className="container mx-auto px-4 py-6 md:px-6 md:py-10">
-      {/* DaisyUI Responsive Card */}
-      <div className="card lg:card-side overflow-hidden border border-[#292c32] bg-black shadow-xl">
+      <div className="card overflow-hidden border border-[#292c32] bg-black shadow-xl lg:card-side">
+        
         {/* Image */}
         <figure className="w-full lg:w-1/2">
           <Image
@@ -45,18 +74,17 @@ const Page = async ({ params }: PageProps) => {
             alt={logo.name}
             width={800}
             height={800}
-            className="h-64 w-full object-cover sm:h-80 lg:h-full lg:min-h-[650px]"
+            className="h-64 w-full object-cover sm:h-80 lg:h-full lg:min-h-[600px]"
           />
         </figure>
 
         {/* Content */}
         <div className="card-body w-full lg:w-1/2">
-          {/* Name */}
-          <h1 className="card-title text-2xl font-extrabold uppercase text-white sm:text-3xl md:text-4xl">
+          
+          <h1 className="card-title text-2xl font-extrabold uppercase text-white sm:text-3xl">
             {logo.name}
           </h1>
 
-          {/* Description */}
           <p className="mt-2 text-sm leading-6 text-gray-400">
             {logo.description}
           </p>
@@ -103,7 +131,9 @@ const Page = async ({ params }: PageProps) => {
                   key={index}
                   className="flex gap-2 text-sm leading-6 text-gray-300"
                 >
-                  <span className="font-bold text-gray-500">{index + 1}.</span>
+                  <span className="font-bold text-gray-500">
+                    {index + 1}.
+                  </span>
 
                   <span>{instruction}</span>
                 </li>
@@ -111,17 +141,9 @@ const Page = async ({ params }: PageProps) => {
             </ol>
           </div>
 
-          {/* Actions */}
-          {/* <div className="card-actions mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
-           <AddButton logo={logo}/>
-
-            <button className="btn btn-outline w-full text-white sm:w-auto">
-              <SaveButton logo={logo} />
-            </button>
-          </div> */}
+          {/* Buttons */}
           <div className="card-actions mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
             <AddButton logo={logo} />
-
             <SaveButton logo={logo} />
           </div>
         </div>

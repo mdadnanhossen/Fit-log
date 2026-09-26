@@ -88,11 +88,13 @@ const MyPlanPage = () => {
 
   if (isLoading) {
     return (
-      <section className="container mx-auto px-4 py-10 md:px-6">
-        <div className="flex min-h-[400px] items-center justify-center">
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <div className="text-center">
           <span className="loading loading-spinner loading-lg text-[#b8ff00]" />
+
+          <p className="mt-3 text-sm text-gray-500">Loading workouts...</p>
         </div>
-      </section>
+      </div>
     );
   }
 
@@ -120,6 +122,7 @@ const MyPlanPage = () => {
         <PlanStats workouts={activeTab === "today" ? LogosData : SavedData} />
       </div>
 
+      {/* <PlanStats workouts={LogosData} /> */}
       {/* ======================================
           TABS + SORT
       ====================================== */}
