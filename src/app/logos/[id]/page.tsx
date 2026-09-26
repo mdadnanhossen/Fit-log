@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 const getLogo = async (id: string): Promise<ILogo | null> => {
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+  const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`);
 
   if (!res.ok) {
     return null;
