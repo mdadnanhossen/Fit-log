@@ -12,7 +12,7 @@ FitLog is a workout library web application where users can explore workouts, cr
 * Tailwind CSS
 * DaisyUI
 * REST API
-* LocalStorage
+* LocalStorage.
 
 ## Key Features
 
