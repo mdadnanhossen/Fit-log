@@ -27,7 +27,7 @@ const Page = async ({ params }: PageProps) => {
 
   const logo = await getLogo(id);
 
-  // Invalid workout ID
+  
   if (!logo) {
     notFound();
   }
@@ -67,7 +67,7 @@ const Page = async ({ params }: PageProps) => {
     <section className="container mx-auto px-4 py-6 md:px-6 md:py-10">
       <div className="card overflow-hidden border border-[#292c32] bg-black shadow-xl lg:card-side">
         
-        {/* Image */}
+       
         <figure className="w-full lg:w-1/2">
           <Image
             src={logo.image}
@@ -78,7 +78,7 @@ const Page = async ({ params }: PageProps) => {
           />
         </figure>
 
-        {/* Content */}
+      
         <div className="card-body w-full lg:w-1/2">
           
           <h1 className="card-title text-2xl font-extrabold uppercase text-white sm:text-3xl">
@@ -89,7 +89,7 @@ const Page = async ({ params }: PageProps) => {
             {logo.description}
           </p>
 
-          {/* Muscle Groups */}
+        
           <div className="mt-3 flex flex-wrap gap-2">
             {logo.muscleGroups.map((muscle, index) => (
               <span
@@ -101,7 +101,7 @@ const Page = async ({ params }: PageProps) => {
             ))}
           </div>
 
-          {/* Stats */}
+          
           <div className="mt-5 overflow-hidden rounded-xl border border-[#292c32]">
             {stats.map((stat) => (
               <div
@@ -119,7 +119,7 @@ const Page = async ({ params }: PageProps) => {
             ))}
           </div>
 
-          {/* Instructions */}
+        
           <div className="mt-5">
             <h2 className="mb-3 text-lg font-bold uppercase text-white">
               Instructions
@@ -141,7 +141,7 @@ const Page = async ({ params }: PageProps) => {
             </ol>
           </div>
 
-          {/* Buttons */}
+         
           <div className="card-actions mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
             <AddButton logo={logo} />
             <SaveButton logo={logo} />

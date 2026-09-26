@@ -16,7 +16,7 @@ const Logos = async () => {
 
   return (
     <section className="container mx-auto px-6 py-8 md:py-10">
-      {/* Library Header */}
+     
       <div className="mb-6">
         <h2 className="text-3xl font-extrabold text-white">
           THE LIBRARY
@@ -27,7 +27,7 @@ const Logos = async () => {
         </p>
       </div>
 
-      {/* Cards */}
+   
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {logosData.map((logo) => (
           <LogoCard key={logo.id} logo={logo} />
