@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -11,9 +10,7 @@ interface PageProps {
 }
 
 const getLogo = async (id: string): Promise<ILogo | null> => {
-  const res = await fetch(
-    `https://api.abcz.workers.dev/api/fitlog/${id}`
-  );
+  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
 
   if (!res.ok) {
     return null;
@@ -27,7 +24,6 @@ const Page = async ({ params }: PageProps) => {
 
   const logo = await getLogo(id);
 
-  
   if (!logo) {
     notFound();
   }
@@ -66,8 +62,6 @@ const Page = async ({ params }: PageProps) => {
   return (
     <section className="container mx-auto px-4 py-6 md:px-6 md:py-10">
       <div className="card overflow-hidden border border-[#292c32] bg-black shadow-xl lg:card-side">
-        
-       
         <figure className="w-full lg:w-1/2">
           <Image
             src={logo.image}
@@ -78,9 +72,7 @@ const Page = async ({ params }: PageProps) => {
           />
         </figure>
 
-      
         <div className="card-body w-full lg:w-1/2">
-          
           <h1 className="card-title text-2xl font-extrabold uppercase text-white sm:text-3xl">
             {logo.name}
           </h1>
@@ -89,7 +81,6 @@ const Page = async ({ params }: PageProps) => {
             {logo.description}
           </p>
 
-        
           <div className="mt-3 flex flex-wrap gap-2">
             {logo.muscleGroups.map((muscle, index) => (
               <span
@@ -101,7 +92,6 @@ const Page = async ({ params }: PageProps) => {
             ))}
           </div>
 
-          
           <div className="mt-5 overflow-hidden rounded-xl border border-[#292c32]">
             {stats.map((stat) => (
               <div
@@ -119,7 +109,6 @@ const Page = async ({ params }: PageProps) => {
             ))}
           </div>
 
-        
           <div className="mt-5">
             <h2 className="mb-3 text-lg font-bold uppercase text-white">
               Instructions
@@ -131,9 +120,7 @@ const Page = async ({ params }: PageProps) => {
                   key={index}
                   className="flex gap-2 text-sm leading-6 text-gray-300"
                 >
-                  <span className="font-bold text-gray-500">
-                    {index + 1}.
-                  </span>
+                  <span className="font-bold text-gray-500">{index + 1}.</span>
 
                   <span>{instruction}</span>
                 </li>
@@ -141,7 +128,6 @@ const Page = async ({ params }: PageProps) => {
             </ol>
           </div>
 
-         
           <div className="card-actions mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
             <AddButton logo={logo} />
             <SaveButton logo={logo} />

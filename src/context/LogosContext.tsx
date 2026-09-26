@@ -28,10 +28,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
   const [SavedData, setSavedData] = useState<ILogo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // ==========================================
-  // LOAD DATA FROM LOCAL STORAGE
-  // ==========================================
-
   useEffect(() => {
     try {
       const savedPlan = localStorage.getItem("fitlog-plan");
@@ -51,29 +47,17 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // ==========================================
-  // SAVE TODAY'S PLAN
-  // ==========================================
-
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem("fitlog-plan", JSON.stringify(LogosData));
     }
   }, [LogosData, isLoading]);
 
-  // ==========================================
-  // SAVE SAVED WORKOUTS
-  // ==========================================
-
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem("fitlog-saved", JSON.stringify(SavedData));
     }
   }, [SavedData, isLoading]);
-
-  // ==========================================
-  // ADD WORKOUT TO TODAY'S PLAN
-  // ==========================================
 
   const addToPlan = (logo: ILogo): boolean => {
     // Maximum 5 workouts
@@ -82,7 +66,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
       return false;
     }
 
-    // Already exists
     const alreadyAdded = LogosData.some((item) => item.id === logo.id);
 
     if (alreadyAdded) {
@@ -102,10 +85,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
-  // ==========================================
-  // REMOVE WORKOUT FROM TODAY'S PLAN
-  // ==========================================
-
   const removeFromPlan = (id: number) => {
     const workout = LogosData.find((item) => item.id === id);
 
@@ -115,10 +94,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
       toast.success(`${workout.name} removed from your plan.`);
     }
   };
-
-  // ==========================================
-  // MARK WORKOUT AS DONE
-  // ==========================================
 
   const markAsDone = (id: number) => {
     const workout = LogosData.find((item) => item.id === id);
@@ -143,10 +118,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // ==========================================
-  // SAVE WORKOUT FOR LATER
-  // ==========================================
-
   const saveForLater = (logo: ILogo) => {
     const alreadySaved = SavedData.some((item) => item.id === logo.id);
 
@@ -160,10 +131,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
     toast.success(`${logo.name} saved for later.`);
   };
 
-  // ==========================================
-  // REMOVE FROM SAVED
-  // ==========================================
-
   const removeFromSaved = (id: number) => {
     const workout = SavedData.find((item) => item.id === id);
 
@@ -173,10 +140,6 @@ const LogosProvider = ({ children }: { children: ReactNode }) => {
       toast.success(`${workout.name} removed from saved.`);
     }
   };
-
-  // ==========================================
-  // SHARED CONTEXT DATA
-  // ==========================================
 
   const sharedData: LogosContextType = {
     LogosData,

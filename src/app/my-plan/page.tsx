@@ -32,10 +32,6 @@ const MyPlanPage = () => {
     removeFromSaved,
   } = context;
 
-  // ==========================================
-  // SORT TODAY'S PLAN
-  // ==========================================
-
   const sortedPlan = useMemo(() => {
     const data = [...LogosData];
 
@@ -56,10 +52,6 @@ const MyPlanPage = () => {
         return data;
     }
   }, [LogosData, sortBy]);
-
-  // ==========================================
-  // SORT SAVED
-  // ==========================================
 
   const sortedSaved = useMemo(() => {
     const data = [...SavedData];
@@ -82,10 +74,6 @@ const MyPlanPage = () => {
     }
   }, [SavedData, sortBy]);
 
-  // ==========================================
-  // LOADING
-  // ==========================================
-
   if (isLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
@@ -100,10 +88,6 @@ const MyPlanPage = () => {
 
   return (
     <section className="container mx-auto max-w-[1200px] px-4 py-8 md:px-6 md:py-10">
-      {/* ======================================
-          HEADER
-      ====================================== */}
-
       <div>
         <h1 className="text-3xl font-extrabold uppercase text-white sm:text-4xl">
           My Plan
@@ -114,18 +98,9 @@ const MyPlanPage = () => {
         </p>
       </div>
 
-      {/* ======================================
-          STATS
-      ====================================== */}
-
       <div className="mt-6">
         <PlanStats workouts={activeTab === "today" ? LogosData : SavedData} />
       </div>
-
-      {/* <PlanStats workouts={LogosData} /> */}
-      {/* ======================================
-          TABS + SORT
-      ====================================== */}
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex-1">
@@ -137,7 +112,6 @@ const MyPlanPage = () => {
           />
         </div>
 
-        {/* Sort */}
         <div className="flex items-center justify-between gap-2 sm:justify-end">
           <span className="text-[10px] uppercase tracking-wide text-gray-500">
             Sort By
@@ -158,10 +132,6 @@ const MyPlanPage = () => {
           </select>
         </div>
       </div>
-
-      {/* ======================================
-          TODAY'S PLAN
-      ====================================== */}
 
       {activeTab === "today" && (
         <div className="mt-5">
@@ -197,10 +167,6 @@ const MyPlanPage = () => {
         </div>
       )}
 
-      {/* ======================================
-          SAVED
-      ====================================== */}
-
       {activeTab === "saved" && (
         <div className="mt-5">
           {sortedSaved.length === 0 ? (
@@ -233,10 +199,6 @@ const MyPlanPage = () => {
           )}
         </div>
       )}
-
-      {/* ======================================
-          PLAN LIMIT
-      ====================================== */}
 
       {activeTab === "today" && LogosData.length >= 5 && (
         <p className="mt-4 text-center text-[10px] text-gray-600">

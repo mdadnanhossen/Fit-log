@@ -1,4 +1,3 @@
-
 import { ILogo } from "@/types/logos.types";
 
 interface PlanStatsProps {
@@ -10,17 +9,16 @@ const PlanStats = ({ workouts }: PlanStatsProps) => {
 
   const totalMinutes = workouts.reduce(
     (total, workout) => total + workout.duration,
-    0
+    0,
   );
 
   const totalCalories = workouts.reduce(
     (total, workout) => total + workout.caloriesBurned,
-    0
+    0,
   );
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-      {/* Exercises */}
       <div className="rounded-xl border border-[#292c32] bg-[#0d0f11] p-5">
         <p className="text-xs font-bold uppercase tracking-wide text-gray-500">
           Exercises
@@ -31,7 +29,6 @@ const PlanStats = ({ workouts }: PlanStatsProps) => {
         </p>
       </div>
 
-      {/* Minutes */}
       <div className="rounded-xl border border-[#292c32] bg-[#0d0f11] p-5">
         <p className="text-xs font-bold uppercase tracking-wide text-gray-500">
           Minutes
@@ -42,7 +39,6 @@ const PlanStats = ({ workouts }: PlanStatsProps) => {
         </p>
       </div>
 
-      {/* Calories */}
       <div className="rounded-xl border border-[#292c32] bg-[#0d0f11] p-5">
         <p className="text-xs font-bold uppercase tracking-wide text-gray-500">
           Calories
